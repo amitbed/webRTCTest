@@ -17,16 +17,14 @@
     <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
     <script type="text/javascript">
         function requestVideoAndAudio() {
-            navigator.getUserMedia({ video: true, audio: true },
-                getUserMediaOkCallback, getUserMediaFailedCallback);
-
-            setTimeout(() => {
-                navigator.mediaDevices.enumerateDevices().then(getUserMediaOkCallback).catch(getUserMediaFailedCallback)
-            }, 5000);
-        }
-
-        function getUserMediaFailedCallback(error) {
-            alert("User media request denied with error code " + error.code);
+            navigator.getUserMedia({ video: true, audio: true })
+            .then(stream => {
+                getUserMediaOkCallback(stream);
+                navigator.mediaDevices.enumerateDevices().then(getUserMediaOkCallback);
+            })
+            .catch(error => {
+                alert("User media request denied with error code " + error.code);
+            });
         }
 
         function getUserMediaOkCallback(stream) {
