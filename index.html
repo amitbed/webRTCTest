@@ -17,7 +17,7 @@
     <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
     <script type="text/javascript">
         function requestVideoAndAudio() {
-            navigator.getUserMedia({ video: true, audio: true })
+            navigator.mediaDevices.getUserMedia({ video: true, audio: true })
             .then(stream => {
                 getUserMediaOkCallback(stream);
                 navigator.mediaDevices.enumerateDevices().then(getUserMediaOkCallback);
