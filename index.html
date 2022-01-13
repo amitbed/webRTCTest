@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+=<!DOCTYPE html>
 <!--
   Copyright (c) 2014 The WebRTC project authors. All Rights Reserved.
 
@@ -20,7 +20,7 @@
             navigator.mediaDevices.getUserMedia({ video: true, audio: true })
             .then(stream => {
                 getUserMediaOkCallback(stream);
-                navigator.mediaDevices.enumerateDevices().then(getUserMediaOkCallback);
+                navigator.mediaDevices.enumerateDevices().then(devs => console.log(devs));
             })
             .catch(error => {
                 alert("User media request denied with error code " + error.code);
@@ -32,10 +32,12 @@
             const micTracks = stream.getAudioTracks();
             if (cameraTracks.length > 0) {
                 const settings = cameraTracks[0].getSettings();
+                console.log('camera settings');
                 console.log(settings);
             }
             if (micTracks.length > 0) {
                 const settings = micTracks[0].getSettings();
+                console.log('mic settings');
                 console.log(settings);
             }
             document.getElementById("view1").srcObject = stream;
